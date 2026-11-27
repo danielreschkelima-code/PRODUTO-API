@@ -51,7 +51,7 @@ app.post('/api/produtos', (req, res) => {
 
 // EXERCÍCIO 6: rota DEL
 
-app.del('/api/produtos/:id'), (req, res) => {
+app.delete('/api/produtos/:id', (req, res) => {
     const id = Number(req.params.id);
     const produto = produtos.find((p) => p.id === id);
 
@@ -59,9 +59,9 @@ app.del('/api/produtos/:id'), (req, res) => {
         return res.status(404).json({erro: 'Produto não encontrado ou produto já excluído.'});
     }
 
-    produtos = produtos.filter((item) => item.id === id));
-    res.status(204); 
-}
+    produtos.splice(produtos.findIndex((produto) => produto.id === id), 1);
+    res.status(204).send(); 
+});
 
 
 app.listen(PORTA, () =>{
